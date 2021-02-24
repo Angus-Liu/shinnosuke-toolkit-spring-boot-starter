@@ -20,6 +20,10 @@ public class ShinnosukeToolkitAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
+        printBanner();
+    }
+
+    private void printBanner() {
         ClassPathResource bannerResource = new ClassPathResource(BANNER_NAME);
         try (InputStreamReader inputStreamReader = new InputStreamReader(bannerResource.getInputStream());
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
