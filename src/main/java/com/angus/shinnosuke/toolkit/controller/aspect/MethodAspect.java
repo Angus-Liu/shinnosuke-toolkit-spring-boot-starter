@@ -24,7 +24,7 @@ public class MethodAspect {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Start controller method aspect...");
+        log.info("Start controller method aspect...");
     }
 
     @Pointcut("@within(org.springframework.stereotype.Controller) || @within(org.springframework.web.bind.annotation.RestController)")
