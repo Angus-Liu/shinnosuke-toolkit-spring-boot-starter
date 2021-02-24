@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.angus.shinnosuke.toolkit.ShinnosukeToolkitAutoConfiguration,\
   com.angus.shinnosuke.toolkit.controller.aspect.MethodAspectAutoConfiguration,\
   com.angus.shinnosuke.toolkit.service.aspect.MethodAspectAutoConfiguration
