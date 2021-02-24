@@ -10,20 +10,20 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 
 /**
- * Controller Aspect Auto Configuration
+ * Controller Method Aspect Auto Configuration
  */
 @Slf4j
 @AllArgsConstructor
 @Configuration
-@ConditionalOnProperty(prefix = ControllerAspectProperties.PREFIX, name = "enable")
-@Import(ControllerAspect.class)
-@EnableConfigurationProperties(ControllerAspectProperties.class)
-public class ControllerAspectAutoConfiguration {
+@ConditionalOnProperty(prefix = MethodAspectProperties.PREFIX, name = "enable")
+@Import(MethodAspect.class)
+@EnableConfigurationProperties(MethodAspectProperties.class)
+public class MethodAspectAutoConfiguration {
 
-    private final ControllerAspectProperties controllerAspectProperties;
+    private final MethodAspectProperties controllerAspectProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Load controller aspect auto configuration properties: {}", controllerAspectProperties);
+        log.debug("Load controller method aspect auto configuration properties {}", controllerAspectProperties);
     }
 }

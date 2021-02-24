@@ -15,15 +15,15 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @AllArgsConstructor
 @Configuration
-@ConditionalOnProperty(prefix = ServiceAspectProperties.PREFIX, name = "enable")
-@Import(ServiceAspect.class)
-@EnableConfigurationProperties(ServiceAspectProperties.class)
-public class ServiceAspectAutoConfiguration {
+@ConditionalOnProperty(prefix = MethodAspectProperties.PREFIX, name = "enable")
+@Import(MethodAspect.class)
+@EnableConfigurationProperties(MethodAspectProperties.class)
+public class MethodAspectAutoConfiguration {
 
-    private final ServiceAspectProperties controllerAspectProperties;
+    private final MethodAspectProperties controllerAspectProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Load service aspect auto configuration properties: {}", controllerAspectProperties);
+        log.debug("Load service method aspect auto configuration properties {}", controllerAspectProperties);
     }
 }

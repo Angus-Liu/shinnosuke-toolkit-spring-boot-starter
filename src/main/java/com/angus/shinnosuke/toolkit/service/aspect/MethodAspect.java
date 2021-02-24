@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 @Slf4j
 @Aspect
-public class ServiceAspect {
+public class MethodAspect {
 
     @PostConstruct
     public void postConstruct() {
