@@ -1,6 +1,6 @@
 package com.angus.shinnosuke.toolkit.controller.aspect;
 
-import com.google.common.base.Throwables;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -15,9 +15,12 @@ import java.util.Arrays;
 /**
  * Controller Method Aspect
  */
-@Slf4j
 @Aspect
+@Slf4j
+@AllArgsConstructor
 public class MethodAspect {
+
+    private final MethodAspectProperties aspectProperties;
 
     @PostConstruct
     public void postConstruct() {
@@ -56,6 +59,10 @@ public class MethodAspect {
         assert attributes != null;
         String sessionId = attributes.getSessionId();
         log.info("[{}] Response --->", sessionId);
-        log.info("[{}] Exception: {}", sessionId, Throwables.getStackTraceAsString(exception));
+        if (aspectProperties.isCompletedStackTrace()) {
+            log.error("[{}] Exception:", sessionId, exception);
+        } else {
+            log.error("[{}] Exception: {}", sessionId, exception.toString());
+        }
     }
 }

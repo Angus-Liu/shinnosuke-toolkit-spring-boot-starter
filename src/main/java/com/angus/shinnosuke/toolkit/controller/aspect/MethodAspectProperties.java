@@ -17,4 +17,9 @@ public class MethodAspectProperties {
      * Enable controller method aspect
      */
     private boolean enable = false;
+
+    /**
+     * Enable print completed stack trace when exception occurs
+     */
+    private boolean completedStackTrace = false;
 }
