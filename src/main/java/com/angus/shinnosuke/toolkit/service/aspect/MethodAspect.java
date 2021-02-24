@@ -19,7 +19,7 @@ public class MethodAspect {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Start service aspect...");
+        log.debug("Start service method aspect...");
     }
 
     @Pointcut("@within(org.springframework.stereotype.Service)")
