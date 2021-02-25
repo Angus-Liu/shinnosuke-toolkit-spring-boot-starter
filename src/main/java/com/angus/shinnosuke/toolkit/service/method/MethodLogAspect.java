@@ -1,5 +1,7 @@
 package com.angus.shinnosuke.toolkit.service.method;
 
+import com.angus.shinnosuke.toolkit.utils.JoinPointUtil;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -13,9 +15,12 @@ import java.util.Arrays;
 /**
  * Service Method Log Aspect
  */
-@Slf4j
 @Aspect
+@Slf4j
+@AllArgsConstructor
 public class MethodLogAspect {
+
+    private final MethodLogProperties props;
 
     @PostConstruct
     public void postConstruct() {
@@ -27,15 +32,17 @@ public class MethodLogAspect {
     }
 
     @Before("pointcut()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doBefore(JoinPoint jp) {
+        if(JoinPointUtil.isIgnored(jp, props.getIgnoredItems())) return;
         long threadId = Thread.currentThread().getId();
         log.info("[{}] Call <---", threadId);
-        log.info("[{}] Method: {}", threadId, joinPoint.getSignature());
-        log.info("[{}] Args: {}", threadId, Arrays.toString(joinPoint.getArgs()));
+        log.info("[{}] Method: {}", threadId, jp.getSignature());
+        log.info("[{}] Args: {}", threadId, Arrays.toString(jp.getArgs()));
     }
 
     @AfterReturning(pointcut = "pointcut()", returning = "returning")
-    public void doAfterReturning(Object returning) {
+    public void doAfterReturning(JoinPoint jp, Object returning) {
+        if(JoinPointUtil.isIgnored(jp, props.getIgnoredItems())) return;
         long threadId = Thread.currentThread().getId();
         log.info("[{}] Back --->", threadId);
         log.info("[{}] Return: {}", threadId, returning);

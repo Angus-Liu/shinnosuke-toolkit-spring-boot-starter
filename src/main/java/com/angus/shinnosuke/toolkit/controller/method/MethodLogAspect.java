@@ -1,5 +1,6 @@
 package com.angus.shinnosuke.toolkit.controller.method;
 
+import com.angus.shinnosuke.toolkit.utils.JoinPointUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public class MethodLogAspect {
 
-    private final MethodLogProperties logProperties;
+    private final MethodLogProperties props;
 
     @PostConstruct
     public void postConstruct() {
@@ -32,7 +33,8 @@ public class MethodLogAspect {
     }
 
     @Before("pointcut()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doBefore(JoinPoint jp) {
+        if(JoinPointUtil.isIgnored(jp, props.getIgnoredItems())) return;
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         HttpServletRequest request = attributes.getRequest();
@@ -40,12 +42,13 @@ public class MethodLogAspect {
         log.info("[{}] Request <---", sessionId);
         log.info("[{}] IP: {}", sessionId, request.getRemoteAddr());
         log.info("[{}] URI: {} {}", sessionId, request.getMethod(), request.getRequestURI());
-        log.info("[{}] Method: {}", sessionId, joinPoint.getSignature());
-        log.info("[{}] Args: {}", sessionId, Arrays.toString(joinPoint.getArgs()));
+        log.info("[{}] Method: {}", sessionId, jp.getSignature());
+        log.info("[{}] Args: {}", sessionId, Arrays.toString(jp.getArgs()));
     }
 
     @AfterReturning(pointcut = "pointcut()", returning = "response")
-    public void doAfterReturning(Object response) {
+    public void doAfterReturning(JoinPoint jp, Object response) {
+        if(JoinPointUtil.isIgnored(jp, props.getIgnoredItems())) return;
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         String sessionId = attributes.getSessionId();
@@ -54,12 +57,13 @@ public class MethodLogAspect {
     }
 
     @AfterThrowing(pointcut = "pointcut()", throwing = "exception")
-    public void doAfterThrowing(Exception exception) {
+    public void doAfterThrowing(JoinPoint jp, Exception exception) {
+        if(JoinPointUtil.isIgnored(jp, props.getIgnoredItems())) return;
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         String sessionId = attributes.getSessionId();
         log.info("[{}] Response --->", sessionId);
-        if (logProperties.isCompletedStackTrace()) {
+        if (props.isCompletedStackTrace()) {
             log.error("[{}] Exception:", sessionId, exception);
         } else {
             log.error("[{}] Exception: {}", sessionId, exception.toString());

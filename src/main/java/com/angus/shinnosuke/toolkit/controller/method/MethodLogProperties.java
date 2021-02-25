@@ -26,9 +26,13 @@ public class MethodLogProperties {
      */
     private boolean completedStackTrace = false;
 
-    // TODO: angus on 2021/2/25 ignorePackages & ignoreClasses
-
-    private List<String> ignorePackages = Collections.emptyList();
-
-    private List<Class<?>> ignoreClasses = Collections.emptyList();
+    /**
+     * ignore packages, classes or methods.
+     * methods need end with "()", overloaded methods are not distinguished for now. <br/>
+     * for example: <br/>
+     *  - com.example <br/>
+     *  - com.example.DemoController <br/>
+     *  - com.example.DemoController.helloWorld()
+     */
+    private List<String> ignoredItems = Collections.emptyList();
 }
