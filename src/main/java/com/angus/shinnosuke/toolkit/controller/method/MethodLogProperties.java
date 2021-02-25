@@ -1,9 +1,11 @@
 package com.angus.shinnosuke.toolkit.controller.method;
 
-import com.angus.shinnosuke.toolkit.conts.GlobalConst;
+import com.angus.shinnosuke.toolkit.consts.GlobalConst;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
 /**
  * Controller Method Log Properties
  */
+@Slf4j
 @Data
 @ConfigurationProperties(MethodLogProperties.PREFIX)
 public class MethodLogProperties {
@@ -31,9 +34,14 @@ public class MethodLogProperties {
      * ignore packages, classes or methods.
      * methods need end with "()", overloaded methods are not distinguished for now. <br/>
      * for example: <br/>
-     *  - com.example <br/>
-     *  - com.example.DemoController <br/>
-     *  - com.example.DemoController.helloWorld()
+     * - com.example <br/>
+     * - com.example.DemoController <br/>
+     * - com.example.DemoController.helloWorld()
      */
     private List<String> ignoredItems = Collections.emptyList();
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("Load controller method log auto configuration properties {}", this);
+    }
 }
