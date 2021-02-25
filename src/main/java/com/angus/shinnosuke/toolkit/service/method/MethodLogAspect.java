@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.service.aspect;
+package com.angus.shinnosuke.toolkit.service.method;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -11,15 +11,15 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 /**
- * Service Aspect
+ * Service Method Log Aspect
  */
 @Slf4j
 @Aspect
-public class MethodAspect {
+public class MethodLogAspect {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("Start service method aspect...");
+        log.info("Start service method log aspect...");
     }
 
     @Pointcut("@within(org.springframework.stereotype.Service)")

@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.service.aspect;
+package com.angus.shinnosuke.toolkit.service.method;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,20 +10,20 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 
 /**
- * Service Aspect Auto Configuration
+ * Service Method Log Auto Configuration
  */
 @Slf4j
 @AllArgsConstructor
 @Configuration
-@ConditionalOnProperty(prefix = MethodAspectProperties.PREFIX, name = "enable")
-@Import(MethodAspect.class)
-@EnableConfigurationProperties(MethodAspectProperties.class)
-public class MethodAspectAutoConfiguration {
+@ConditionalOnProperty(prefix = MethodLogProperties.PREFIX, name = "enable")
+@Import(MethodLogAspect.class)
+@EnableConfigurationProperties(MethodLogProperties.class)
+public class MethodLogAutoConfiguration {
 
-    private final MethodAspectProperties controllerAspectProperties;
+    private final MethodLogProperties logProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Load service method aspect auto configuration properties {}", controllerAspectProperties);
+        log.debug("Load service method log auto configuration properties {}", logProperties);
     }
 }
