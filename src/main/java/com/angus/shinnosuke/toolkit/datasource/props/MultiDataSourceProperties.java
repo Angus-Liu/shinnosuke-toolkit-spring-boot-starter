@@ -28,6 +28,11 @@ public class MultiDataSourceProperties {
     private boolean enable = false;
 
     /**
+     * Enable use custom annotation
+     */
+    private boolean useCustomAnnotation = false;
+
+    /**
      * Default primary datasource name
      */
     private String primary = "master";
