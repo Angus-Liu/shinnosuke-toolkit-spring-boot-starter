@@ -1,5 +1,6 @@
 package com.angus.shinnosuke.toolkit.controller.method;
 
+import com.angus.shinnosuke.toolkit.conts.GlobalConst;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @ConfigurationProperties(MethodLogProperties.PREFIX)
 public class MethodLogProperties {
 
-    public static final String PREFIX = "spring.shinnosuke-toolkit.controller.method-log";
+    public static final String PREFIX = GlobalConst.PREFIX + "controller.method-log";
 
     /**
      * Enable controller method log

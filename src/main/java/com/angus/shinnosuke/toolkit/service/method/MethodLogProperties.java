@@ -1,5 +1,6 @@
 package com.angus.shinnosuke.toolkit.service.method;
 
+import com.angus.shinnosuke.toolkit.conts.GlobalConst;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @ConfigurationProperties(MethodLogProperties.PREFIX)
 public class MethodLogProperties {
 
-    public static final String PREFIX = "spring.shinnosuke-toolkit.service.method-log";
+    public static final String PREFIX = GlobalConst.PREFIX + "service.method-log";
 
     /**
      * Enable service method log
@@ -24,9 +25,9 @@ public class MethodLogProperties {
      * ignore packages, classes or methods.
      * methods need end with "()", overloaded methods are not distinguished for now. <br/>
      * for example: <br/>
-     *  - com.example <br/>
-     *  - com.example.DemoService <br/>
-     *  - com.example.DemoService.helloWorld()
+     * - com.example <br/>
+     * - com.example.DemoService <br/>
+     * - com.example.DemoService.helloWorld()
      */
     private List<String> ignoredItems = Collections.emptyList();
 }
