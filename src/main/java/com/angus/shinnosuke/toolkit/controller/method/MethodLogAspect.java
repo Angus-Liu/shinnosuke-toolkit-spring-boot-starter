@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.controller.aspect;
+package com.angus.shinnosuke.toolkit.controller.method;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * Controller Method Aspect
+ * Controller Method Log Aspect
  */
 @Aspect
 @Slf4j
 @AllArgsConstructor
-public class MethodAspect {
+public class MethodLogAspect {
 
-    private final MethodAspectProperties aspectProperties;
+    private final MethodLogProperties logProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.info("Start controller method aspect...");
+        log.info("Start controller method log aspect...");
     }
 
     @Pointcut("@within(org.springframework.stereotype.Controller) || @within(org.springframework.web.bind.annotation.RestController)")
@@ -59,7 +59,7 @@ public class MethodAspect {
         assert attributes != null;
         String sessionId = attributes.getSessionId();
         log.info("[{}] Response --->", sessionId);
-        if (aspectProperties.isCompletedStackTrace()) {
+        if (logProperties.isCompletedStackTrace()) {
             log.error("[{}] Exception:", sessionId, exception);
         } else {
             log.error("[{}] Exception: {}", sessionId, exception.toString());

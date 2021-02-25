@@ -1,20 +1,20 @@
-package com.angus.shinnosuke.toolkit.controller.aspect;
+package com.angus.shinnosuke.toolkit.controller.method;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
 /**
- * Controller Method Aspect Properties
+ * Controller Method Log Properties
  */
 @Data
-@ConfigurationProperties(MethodAspectProperties.PREFIX)
-public class MethodAspectProperties {
+@ConfigurationProperties(MethodLogProperties.PREFIX)
+public class MethodLogProperties {
 
-    public static final String PREFIX = "spring.shinnosuke-toolkit.controller.method-aspect";
+    public static final String PREFIX = "spring.shinnosuke-toolkit.controller.method-log";
 
     /**
-     * Enable controller method aspect
+     * Enable controller method log
      */
     private boolean enable = false;
 

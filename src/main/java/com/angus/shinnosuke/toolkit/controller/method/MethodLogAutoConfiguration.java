@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.controller.aspect;
+package com.angus.shinnosuke.toolkit.controller.method;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,20 +10,20 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 
 /**
- * Controller Method Aspect Auto Configuration
+ * Controller Method Log Auto Configuration
  */
 @Slf4j
 @AllArgsConstructor
 @Configuration
-@ConditionalOnProperty(prefix = MethodAspectProperties.PREFIX, name = "enable")
-@Import(MethodAspect.class)
-@EnableConfigurationProperties(MethodAspectProperties.class)
-public class MethodAspectAutoConfiguration {
+@ConditionalOnProperty(prefix = MethodLogProperties.PREFIX, name = "enable")
+@Import(MethodLogAspect.class)
+@EnableConfigurationProperties(MethodLogProperties.class)
+public class MethodLogAutoConfiguration {
 
-    private final MethodAspectProperties controllerAspectProperties;
+    private final MethodLogProperties controllerAspectProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("Load controller method aspect auto configuration properties {}", controllerAspectProperties);
+        log.debug("Load controller method log auto configuration properties {}", controllerAspectProperties);
     }
 }
