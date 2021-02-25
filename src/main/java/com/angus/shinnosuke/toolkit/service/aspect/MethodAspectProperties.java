@@ -16,4 +16,6 @@ public class MethodAspectProperties {
      * Enable service aspect
      */
     private boolean enable = false;
+
+    // TODO: angus on 2021/2/25 ignorePackages & ignoreClasses
 }

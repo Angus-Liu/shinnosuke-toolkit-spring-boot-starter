@@ -22,4 +22,6 @@ public class MethodAspectProperties {
      * Enable print completed stack trace when exception occurs
      */
     private boolean completedStackTrace = false;
+    
+    // TODO: angus on 2021/2/25 ignorePackages & ignoreClasses
 }
