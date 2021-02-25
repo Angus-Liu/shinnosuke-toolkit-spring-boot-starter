@@ -1,15 +1,18 @@
 package com.angus.shinnosuke.toolkit.service.method;
 
-import com.angus.shinnosuke.toolkit.conts.GlobalConst;
+import com.angus.shinnosuke.toolkit.consts.GlobalConst;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Service Method Log Properties
  */
+@Slf4j
 @Data
 @ConfigurationProperties(MethodLogProperties.PREFIX)
 public class MethodLogProperties {
@@ -30,4 +33,9 @@ public class MethodLogProperties {
      * - com.example.DemoService.helloWorld()
      */
     private List<String> ignoredItems = Collections.emptyList();
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("Load service method log auto configuration properties {}", this);
+    }
 }
