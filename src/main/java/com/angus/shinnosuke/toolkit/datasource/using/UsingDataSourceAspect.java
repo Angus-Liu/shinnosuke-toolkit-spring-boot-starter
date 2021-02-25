@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+
+import static com.angus.shinnosuke.toolkit.datasource.props.MultiDataSourceProperties.PREFIX;
 
 /**
  * Data source switching aspect, work with {@link UsingDataSource}
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
+@ConditionalOnProperty(prefix = PREFIX, name = "use-custom-annotation", havingValue = "false", matchIfMissing = true)
 public class UsingDataSourceAspect {
 
     @Around("@annotation(usingDataSource)")

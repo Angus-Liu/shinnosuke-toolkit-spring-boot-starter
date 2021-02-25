@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * Specifies the use of data source type, work with {@link UsingDataSourceAspect}
  * and {@link DynamicRoutingDataSource} to switch data source
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UsingDataSource {
     /**
