@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.conts;
+package com.angus.shinnosuke.toolkit.consts;
 
 /**
  * Global Const
