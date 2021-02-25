@@ -8,7 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 /**
- * 数据源切换拦截切面，配合 {@link UsingDataSource}、{@link DynamicRoutingDataSource} 实现数据源切换
+ * Data source switching aspect, work with {@link UsingDataSource}
+ * and {@link DynamicRoutingDataSource} to switch data source
  */
 @Slf4j
 @Aspect
@@ -19,13 +20,14 @@ public class UsingDataSourceAspect {
     public Object around(ProceedingJoinPoint joinPoint, UsingDataSource usingDataSource) throws Throwable {
         String type = usingDataSource.value();
         log.debug("data source type is {}", type);
-        // 保存要切换到的数据源类型
+        // Save the data source type to switch to
+        // TODO: angus on 2021/2/25 Data source type stack to solve nest call
         DynamicRoutingDataSource.TYPE_HOLDER.set(type);
         Object res;
         try {
             res = joinPoint.proceed();
         } finally {
-            // 恢复数据源
+            // Restore to the default data source
             DynamicRoutingDataSource.TYPE_HOLDER.remove();
         }
         return res;

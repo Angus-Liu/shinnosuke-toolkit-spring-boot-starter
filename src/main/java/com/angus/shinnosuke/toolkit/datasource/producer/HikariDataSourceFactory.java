@@ -6,11 +6,14 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
+/**
+ * Hikari Data Source Factory
+ */
 @Component
 public class HikariDataSourceFactory implements BaseDataSourceFactory {
 
     @Override
-    public Class<? extends DataSource> getType() {
+    public Class<? extends DataSource> getCreatableType() {
         return HikariDataSource.class;
     }
 

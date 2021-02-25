@@ -15,7 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 动态路由数据源配置，配合 {@link UsingDataSource}、{@link UsingDataSourceAspect} 实现数据源切换
+ * Dynamic routing data source configuration, work with {@link UsingDataSource}
+ * and {@link UsingDataSourceAspect} to switch data source.
  */
 @Primary
 @Component
@@ -39,10 +40,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         log.info("Start dynamic routing datasource...");
         Map<String, DataSource> dataSourceMap = dataSourceProducer.createDataSourceMap(props);
         log.debug("Data source map is {}", dataSourceMap);
-        // 设置默认数据源
+        // Set default data source
         DataSource defaultDataSource = dataSourceMap.get(props.getPrimary());
         setDefaultTargetDataSource(defaultDataSource);
-        // 设置数据源及其类型映射
+        // Set data source map
         setTargetDataSources(new HashMap<>(dataSourceMap));
     }
 }

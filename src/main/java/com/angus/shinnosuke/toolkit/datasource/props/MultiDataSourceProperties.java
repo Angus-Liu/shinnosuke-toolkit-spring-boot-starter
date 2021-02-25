@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Multi-DataSource Auto Configuration
+ * Multi Data Source Properties
  */
 @Slf4j
 @Data
@@ -38,13 +38,13 @@ public class MultiDataSourceProperties {
     private Map<String, SingleDataSourceProperties> datasource = Collections.emptyMap();
 
     /**
-     * // TODO: angus on 2021/2/25 global druid config
+     * // TODO: angus on 2021/2/25 Global druid config
      */
     @NestedConfigurationProperty
     private DruidDataSource druid = new DruidDataSource();
 
     /**
-     * // TODO: angus on 2021/2/25 global hikari config
+     * // TODO: angus on 2021/2/25 Global hikari config
      */
     @NestedConfigurationProperty
     private HikariDataSource hikari = new HikariDataSource();
