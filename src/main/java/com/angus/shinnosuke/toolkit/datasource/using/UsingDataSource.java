@@ -1,7 +1,6 @@
 package com.angus.shinnosuke.toolkit.datasource.using;
 
 import com.angus.shinnosuke.toolkit.datasource.producer.DynamicRoutingDataSource;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,9 +17,5 @@ public @interface UsingDataSource {
     /**
      * data source name
      */
-    @AliasFor("name")
     String value();
-
-    @AliasFor("value")
-    String name();
 }
