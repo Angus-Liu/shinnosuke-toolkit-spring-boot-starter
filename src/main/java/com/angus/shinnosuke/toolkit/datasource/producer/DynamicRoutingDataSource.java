@@ -37,13 +37,27 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @PostConstruct
     private void postConstruct() {
-        log.info("Start dynamic routing datasource...");
+        log.info("Dynamic routing datasource starting...");
         Map<String, DataSource> dataSourceMap = dataSourceProducer.createDataSourceMap(props);
-        log.debug("Data source map is {}", dataSourceMap);
         // Set default data source
-        DataSource defaultDataSource = dataSourceMap.get(props.getPrimary());
+        String primary = props.getPrimary();
+        DataSource defaultDataSource = dataSourceMap.get(primary);
         setDefaultTargetDataSource(defaultDataSource);
         // Set data source map
         setTargetDataSources(new HashMap<>(dataSourceMap));
+        log.info(
+                "Dynamic routing datasource start completed, loaded {} data sources ({}), primary is [{}].",
+                dataSourceMap.size(),
+                dataSourcesInfo(dataSourceMap),
+                primary
+        );
+    }
+
+    private String dataSourcesInfo(Map<String, DataSource> dataSourceMap) {
+        StringBuilder sb = new StringBuilder();
+        dataSourceMap.forEach((name, ds) ->
+                sb.append(name).append(" - ").append(ds.getClass().getSimpleName()).append(", ")
+        );
+        return sb.delete(sb.length() - 2, sb.length()).toString();
     }
 }
