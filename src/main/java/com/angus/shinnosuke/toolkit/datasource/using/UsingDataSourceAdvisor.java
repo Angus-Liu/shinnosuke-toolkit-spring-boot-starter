@@ -27,7 +27,9 @@ public class UsingDataSourceAdvisor extends AbstractPointcutAdvisor {
     private final Advice advice = new UsingDataSourceMethodInterceptor();
 
     private Pointcut buildPointcut() {
-        Pointcut classPointcut = new AnnotationMatchingPointcut(UsingDataSource.class, true);
+        // The pointcut that class annotated by the specified annotation(include its children type)
+        Pointcut classPointcut = new AnnotationMatchingPointcut(UsingDataSource.class, null, true);
+        // The pointcut that method annotated by the specified annotation(include its children type)
         Pointcut methodPointcut = new AnnotationMatchingPointcut(null, UsingDataSource.class, true);
         return new ComposablePointcut(classPointcut).union(methodPointcut);
     }
