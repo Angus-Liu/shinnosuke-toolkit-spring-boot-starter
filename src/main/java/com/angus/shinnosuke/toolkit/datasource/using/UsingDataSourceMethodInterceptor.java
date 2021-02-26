@@ -6,6 +6,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,7 +22,11 @@ public class UsingDataSourceMethodInterceptor implements MethodInterceptor {
     public Object invoke(@Nonnull MethodInvocation methodInvocation) throws Throwable {
         Method method = methodInvocation.getMethod();
         AnnotationAttributes attributes = AnnotatedElementUtils.getMergedAnnotationAttributes(method, UsingDataSource.class);
-        assert attributes != null;
+        if (attributes == null) {
+            Class<?> declaringClass = method.getDeclaringClass();
+            attributes = AnnotatedElementUtils.getMergedAnnotationAttributes(declaringClass, UsingDataSource.class);
+        }
+        Assert.notNull(attributes, UsingDataSource.class.getName() + " annotation not found");
         String type = attributes.getString("value");
         log.debug("data source type is {}", type);
         // Save the data source type to switch to
