@@ -1,11 +1,10 @@
 package com.angus.shinnosuke.toolkit.datasource.using;
 
+import com.angus.shinnosuke.toolkit.common.utils.PointcutUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
-import org.springframework.aop.support.ComposablePointcut;
-import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +21,9 @@ import static com.angus.shinnosuke.toolkit.datasource.props.MultiDataSourcePrope
 @ConditionalOnProperty(prefix = PREFIX, name = "use-custom-annotation", havingValue = "true")
 public class UsingDataSourceAdvisor extends AbstractPointcutAdvisor {
 
-    private final Pointcut pointcut = buildPointcut();
+    private final Pointcut pointcut = PointcutUtil.annotationMatchingPointcut(UsingDataSource.class, true, true, true);
 
     private final Advice advice = new UsingDataSourceMethodInterceptor();
-
-    private Pointcut buildPointcut() {
-        // The pointcut that class annotated by the specified annotation(include its children type)
-        Pointcut classPointcut = new AnnotationMatchingPointcut(UsingDataSource.class, null, true);
-        // The pointcut that method annotated by the specified annotation(include its children type)
-        Pointcut methodPointcut = new AnnotationMatchingPointcut(null, UsingDataSource.class, true);
-        return new ComposablePointcut(classPointcut).union(methodPointcut);
-    }
 
     @Nonnull
     @Override
