@@ -19,8 +19,8 @@ public class HikariDataSourceFactory implements BaseDataSourceFactory {
 
     @Override
     public DataSource create(SingleDataSourceProperties props) {
-        HikariDataSource hikariDataSource = props.getHikari();
-        hikariDataSource.validate();
-        return hikariDataSource;
+        HikariDataSource hikari = props.getHikari();
+        hikari.validate();
+        return hikari;
     }
 }

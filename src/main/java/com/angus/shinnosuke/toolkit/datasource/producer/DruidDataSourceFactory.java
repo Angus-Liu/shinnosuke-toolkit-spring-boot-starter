@@ -20,12 +20,12 @@ public class DruidDataSourceFactory implements BaseDataSourceFactory {
 
     @Override
     public DataSource create(SingleDataSourceProperties props) {
-        DruidDataSource druidDataSource = props.getDruid();
+        DruidDataSource druid = props.getDruid();
         try {
-            druidDataSource.init();
+            druid.init();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return druidDataSource;
+        return druid;
     }
 }
