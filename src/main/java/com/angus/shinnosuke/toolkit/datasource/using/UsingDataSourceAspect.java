@@ -20,7 +20,7 @@ import static com.angus.shinnosuke.toolkit.datasource.props.MultiDataSourcePrope
 @ConditionalOnProperty(prefix = PREFIX, name = "use-custom-annotation", havingValue = "false", matchIfMissing = true)
 public class UsingDataSourceAspect {
 
-    @Around("@annotation(usingDataSource)")
+    @Around("@annotation(usingDataSource) || @within(usingDataSource)")
     public Object around(ProceedingJoinPoint joinPoint, UsingDataSource usingDataSource) throws Throwable {
         String type = usingDataSource.value();
         log.debug("data source type is {}", type);
