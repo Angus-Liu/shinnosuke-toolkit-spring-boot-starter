@@ -12,6 +12,9 @@ import java.util.List;
 @Slf4j
 public class JoinPointUtil {
 
+    /**
+     * Get declaring type with method name, such as 'com.example.Demo.hello()'
+     */
     private static String getDeclaringTypeWithMethodName(JoinPoint joinPoint) {
         String declaringTypeName = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
@@ -19,9 +22,9 @@ public class JoinPointUtil {
     }
 
     /**
-     * check if the declaring type with method name of the join point is in ignored items
+     * Check if the declaring type with method name of the join point is in ignored items
      *
-     * @param ignoredItems format same as {@link MethodLogProperties.ignoredItems}
+     * @param ignoredItems Format same as {@link MethodLogProperties.ignoredItems}
      */
     public static boolean isIgnored(JoinPoint joinPoint, List<String> ignoredItems) {
         if (ignoredItems.isEmpty()) return false;
