@@ -34,7 +34,6 @@ public class DataSourceProducer {
     void postConstruct() {
         // Map data source factory with its created data source type
         factories.forEach(factory -> factoryMap.put(factory.getCreatableType(), factory));
-        log.debug("Datasource factory map is {}", factoryMap);
     }
 
     /**
