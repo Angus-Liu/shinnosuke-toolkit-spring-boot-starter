@@ -1,6 +1,6 @@
 package com.angus.shinnosuke.toolkit.service.method;
 
-import com.angus.shinnosuke.toolkit.utils.JoinPointUtil;
+import com.angus.shinnosuke.toolkit.common.utils.JoinPointUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

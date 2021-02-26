@@ -1,7 +1,7 @@
 package com.angus.shinnosuke.toolkit.datasource.props;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.angus.shinnosuke.toolkit.consts.GlobalConst;
+import com.angus.shinnosuke.toolkit.common.consts.GlobalConst;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

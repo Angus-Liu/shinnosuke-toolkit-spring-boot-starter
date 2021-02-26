@@ -1,4 +1,4 @@
-package com.angus.shinnosuke.toolkit.utils;
+package com.angus.shinnosuke.toolkit.common.utils;
 
 import com.angus.shinnosuke.toolkit.controller.method.MethodLogProperties;
 import lombok.extern.slf4j.Slf4j;
